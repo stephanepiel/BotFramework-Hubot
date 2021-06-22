@@ -87,8 +87,7 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
         return message
 
     toSendable: (context, message) ->
-        @robot.logger.info "================================="
-        @robot.logger.info "#{LogPrefix} toSendable : #{JSON.stringify(message)}"
+        @robot.logger.info "#{LogPrefix} toSendable"
         activity = context?.user?.activity
 
         response = message
@@ -117,6 +116,8 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
           type: "typing"
           address: activity?.address
 
+        @robot.logger.info "================================="
+        @robot.logger.info "#{LogPrefix} Response : #{JSON.stringify([typingMessage, response])}"
         return [typingMessage, response]
 
     # Converts the activity to a hubot message and passes it to
