@@ -170,6 +170,7 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
     sendPayload: (connector, payload) ->
         if !Array.isArray(payload)
             payload = [payload]
+        @robot.logger.info "Connector : #{JSON.stringify(connector)}"
         connector.send payload, (err, _) =>
             if err
                 throw err
