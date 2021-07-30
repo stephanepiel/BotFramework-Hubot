@@ -157,8 +157,6 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
 
     # Combines payloads then sends the combined payload to MS Teams
     send: (connector, payload) ->
-        @robot.logger.info "Connector : #{JSON.stringify(connector)}"
-        @robot.logger.info "Payload : #{JSON.stringify(connector)}"
     # The message is from Teams, so combine hubot responses
         # received within the next 100 ms then send the combined
         # response
@@ -172,7 +170,6 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
     sendPayload: (connector, payload) ->
         if !Array.isArray(payload)
             payload = [payload]
-        @robot.logger.info "Connector : #{JSON.stringify(connector)}"
         connector.send payload, (err, _) =>
             if err
                 throw err
