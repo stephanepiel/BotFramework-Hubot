@@ -168,10 +168,12 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
             @combineResponses(@robot.brain.get("teamsResponse"), payload)
 
     sendPayload: (connector, payload) ->
+        robot.logger.info "#{LogPrefix} payload = #{JSON.stringify(payload)}"
         if !Array.isArray(payload)
             payload = [payload]
         connector.send payload, (err, _) =>
             if err
+                @robot.logger.error "#{LogPrefix} err = #{JSON.stringify(err)}"
                 throw err
             @robot.brain.remove("teamsResponse")
             @robot.brain.remove("justReceivedResponse")
