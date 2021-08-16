@@ -157,7 +157,8 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
 
     # Combines payloads then sends the combined payload to MS Teams
     send: (connector, payload) ->
-    # The message is from Teams, so combine hubot responses
+        robot.logger.info "#{LogPrefix} send"
+        # The message is from Teams, so combine hubot responses
         # received within the next 100 ms then send the combined
         # response
         if @robot.brain.get("justReceivedResponse") is null
@@ -168,6 +169,7 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
             @combineResponses(@robot.brain.get("teamsResponse"), payload)
 
     sendPayload: (connector, payload) ->
+        robot.logger.info "#{LogPrefix} sendPayload"
         robot.logger.info "#{LogPrefix} payload = #{JSON.stringify(payload)}"
         if !Array.isArray(payload)
             payload = [payload]
@@ -184,6 +186,7 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
     # first response. Assumes inputs follow the format of the payload returned by
     # toSendable
     combineResponses: (storedPayload, newPayload) ->
+        robot.logger.info "#{LogPrefix} combineResponses"
         storedMessage = storedPayload[1]
         newMessage = newPayload[1]
 
