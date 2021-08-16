@@ -76,10 +76,12 @@ class TextMiddleware extends BaseMiddleware
 
     # Sends the payload to the bot framework messaging channel
     send: (connector, payload) ->
+        robot.logger.info "#{LogPrefix} payload = #{JSON.stringify(payload)}"
         if !Array.isArray(payload)
             payload = [payload]
         connector.send payload, (err, _) ->
             if err
+                @robot.logger.error "#{LogPrefix} err = #{JSON.stringify(err)}"
                 throw err
 
 Middleware = {
