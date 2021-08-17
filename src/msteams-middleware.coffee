@@ -161,6 +161,8 @@ class MicrosoftTeamsMiddleware extends BaseMiddleware
         # The message is from Teams, so combine hubot responses
         # received within the next 100 ms then send the combined
         # response
+        jrr = @robot.brain.get("justReceivedResponse")
+        @robot.logger.info "#{LogPrefix} justReceivedResponse is #{JSON.stringify(jrr)}"
         if @robot.brain.get("justReceivedResponse") is null
             @robot.brain.set("teamsResponse", payload)
             @robot.brain.set("justReceivedResponse", true)
